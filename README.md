@@ -70,3 +70,11 @@
 - Invoice generate karna
 - Reports create karna
 - Certificates / tickets generate karna
+
+#### 1.2 Project Setup (Next.js + pdf-lib)
+
+1. Next.js project create karo (agar already nahi hai):
+```typescript
+npx create-next-app my-pdf-app
+cd my-pdf-app
+```
