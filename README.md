@@ -54,7 +54,7 @@
 
 ---
 
-#### PDF-Lib Basics / Introduction
+#### 1. PDF-Lib Basics / Introduction
 #### 1.1 Pdf-lib kya hai aur kyun use hota hai
 
 - pdf-lib ek JavaScript library hai jo aapko PDF create aur edit karne ka option deti hai.
@@ -152,3 +152,23 @@ export default async function handler(req, res) {
   res.send(Buffer.from(pdfBytes));
 }
 ```
+- Browser mein API call karke bhi download karwa sakte ho
+
+#### Summary / Key Points:
+
+- Pdf-lib se simple PDF create karna easy hai
+- Browser aur server dono mein use hota hai
+- Text, pages aur download initial step hai
+
+--- 
+
+#### 2. Text Manipulation in pdf-lib
+#### 2.1 Simple Text Add Karna
+
+Already basics mein humne drawText use kiya tha:
+```typescript
+page.drawText('Hello PDF-Lib!', { x: 50, y: 350 });
+```
+- `x` aur `y` → position (bottom-left corner se)
+- `size` → font size (default 12)
+- `color` → rgb color `{r,g,b}` 0–1 scale
