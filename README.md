@@ -191,3 +191,33 @@ page.drawText('Custom Font Text', { x: 50, y: 300, font: timesRomanFont, size: 2
     - ZapfDingbats
   
 **Custom Fonts** bhi embed kar sakte ho (TTF/OTF):
+```typescript
+import fs from 'fs';
+
+const fontBytes = fs.readFileSync('./public/fonts/YourFont.ttf');
+const customFont = await pdfDoc.embedFont(fontBytes);
+page.drawText('Custom Font!', { x: 50, y: 250, font: customFont, size: 24 });
+```
+
+#### 2.3 Font Size, Color, Style
+
+```typescript
+page.drawText('Big Red Text', {
+  x: 50,
+  y: 200,
+  size: 36,
+  color: rgb(1, 0, 0), // Red
+});
+
+page.drawText('Small Blue Text', {
+  x: 50,
+  y: 150,
+  size: 12,
+  color: rgb(0, 0, 1), // Blue
+});
+```
+- **Bold / Italic** → standard fonts se limited, custom font use kar ke achieve hota hai
+
+#### 2.4 Multiple Lines / Paragraph
+
+Pdf-lib automatically line break nahi karta. Aapko manually `y` coordinate adjust karna hoga:
