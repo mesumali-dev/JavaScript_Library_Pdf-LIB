@@ -171,3 +171,70 @@ export default async function handler(req, res) {
 - Browser aur server dono mein use hota hai  
 - Text, pages aur download initial step hai
 
+---
+
+
+# 2. Text Manipulation in pdf-lib
+
+## 2.1 Simple Text Add Karna
+
+Already basics mein humne drawText use kiya tha:
+
+page.drawText('Hello PDF-Lib!', { x: 50, y: 350 });
+
+- x aur y → position (bottom-left corner se)  
+- size → font size (default 12)  
+- color → rgb color {r,g,b} 0–1 scale
+
+## 2.2 Font Set Karna
+
+Standard fonts available hain pdf-lib mein:
+
+import { StandardFonts } from 'pdf-lib';
+
+const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);  
+page.drawText('Custom Font Text', { x: 50, y: 300, font: timesRomanFont, size: 24 });
+
+**Available Standard Fonts:**
+
+- TimesRoman  
+- Helvetica  
+- Courier  
+- Symbol  
+- ZapfDingbats  
+
+Custom Fonts bhi embed kar sakte ho (TTF/OTF):
+
+import fs from 'fs';  
+
+const fontBytes = fs.readFileSync('./public/fonts/YourFont.ttf');  
+const customFont = await pdfDoc.embedFont(fontBytes);  
+page.drawText('Custom Font!', { x: 50, y: 250, font: customFont, size: 24 });
+
+## 2.3 Font Size, Color, Style
+
+page.drawText('Big Red Text', { x: 50, y: 200, size: 36, color: rgb(1, 0, 0) });  
+page.drawText('Small Blue Text', { x: 50, y: 150, size: 12, color: rgb(0, 0, 1) });
+
+- Bold / Italic → standard fonts se limited, custom font use kar ke achieve hota hai
+
+## 2.4 Multiple Lines / Paragraph
+
+Pdf-lib automatically line break nahi karta. Aapko manually y coordinate adjust karna hoga:
+
+const lines = ['This is line 1', 'This is line 2', 'This is line 3'];  
+let y = 400;  
+
+lines.forEach(line => {  
+  page.drawText(line, { x: 50, y, size: 20, color: rgb(0,0,0) });  
+  y -= 25; // line spacing  
+});
+
+- y -= 25 → line height / spacing adjust karta hai  
+- Pro Tip: Loop ke through dynamic content (e.g., invoice items) easily add kar sakte ho
+
+✅ **Summary / Key Points:**
+
+- drawText + position + size + color → basic text  
+- Fonts: standard & custom  
+- Multiple lines manually handle hoti hain
