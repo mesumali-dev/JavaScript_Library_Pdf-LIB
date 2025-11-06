@@ -78,3 +78,49 @@
 npx create-next-app my-pdf-app
 cd my-pdf-app
 ```
+
+2. Pdf-lib install karo:
+```typescript
+npm install pdf-lib
+```
+
+#### 1.3 Basic PDF Create Karna
+
+`pages/index.js` mein simple PDF create karte hain:
+```typescript
+import { PDFDocument, rgb } from 'pdf-lib';
+
+export default function Home() {
+  const createPdf = async () => {
+    // 1. New PDF document create karo
+    const pdfDoc = await PDFDocument.create();
+
+    // 2. Ek new page add karo
+    const page = pdfDoc.addPage([600, 400]); // width:600, height:400
+
+    // 3. Text add karo
+    page.drawText('Hello PDF-Lib!', {
+      x: 50,
+      y: 350,
+      size: 30,
+      color: rgb(0, 0.53, 0.71),
+    });
+
+    // 4. PDF ko byte array mein convert karo
+    const pdfBytes = await pdfDoc.save();
+
+    // 5. Browser mein download karo
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.download = 'example.pdf';
+    link.click();
+  };
+
+  return (
+    <div style={{ padding: '50px' }}>
+      <button onClick={createPdf}>Create PDF</button>
+    </div>
+  );
+}
+```
