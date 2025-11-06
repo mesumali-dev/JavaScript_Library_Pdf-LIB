@@ -124,3 +124,31 @@ export default function Home() {
   );
 }
 ```
+
+##### Explanation:
+
+- `PDFDocument.create()` → new PDF banata hai
+- `addPage([width, height])` → page add karta hai
+- `drawText()` → page pe text add karta hai
+- `pdfDoc.save()` → PDF bytes generate karta hai
+- Browser mein download ke liye blob aur link use kiya
+
+#### 1.4 PDF Save / Export Karna
+
+- Above example mein browser download method dikhaya
+- Server-side Next.js (API route) mein bhi PDF generate karke return kar sakte ho:
+```typescript
+// pages/api/create-pdf.js
+import { PDFDocument, rgb } from 'pdf-lib';
+
+export default async function handler(req, res) {
+  const pdfDoc = await PDFDocument.create();
+  const page = pdfDoc.addPage([600, 400]);
+  page.drawText('Server-side PDF!', { x: 50, y: 350, size: 30, color: rgb(1, 0, 0) });
+  const pdfBytes = await pdfDoc.save();
+  
+  res.setHeader('Content-Type', 'application/pdf');
+  res.setHeader('Content-Disposition', 'attachment; filename=server.pdf');
+  res.send(Buffer.from(pdfBytes));
+}
+```
