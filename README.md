@@ -183,9 +183,11 @@ const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
 page.drawText('Custom Font Text', { x: 50, y: 300, font: timesRomanFont, size: 24 });
 ```
 - **Available Standard Fonts:**
+  
     - TimesRoman
     - Helvetica
     - Courier
     - Symbol
     - ZapfDingbats
+  
 **Custom Fonts** bhi embed kar sakte ho (TTF/OTF):
