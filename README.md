@@ -52,4 +52,12 @@
 2. Reusable templates / components
 3. Async handling & performance in Next.js
 
-Async handling & performance in Next.js
+---
+
+#### PDF-Lib Basics / Introduction
+#### 1.1 Pdf-lib kya hai aur kyun use hota hai
+
+- pdf-lib ek JavaScript library hai jo aapko PDF create aur edit karne ka option deti hai.
+- Iska use mostly web apps (Next.js, React, Node.js) mein hota hai.
+- Features:
+    - PDF create karna from scratch
